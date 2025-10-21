@@ -1,0 +1,173 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Nunito', sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #1a2a6c, #2c3e50, #1a1a2e);
+    color: #f0f0f0;
+    padding: 20px;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 30px;
+    padding: 20px;
+    background: linear-gradient(135deg, #004d40, #00796b, #004d40);
+    border-radius: 15px;
+    color: white;
+    box-shadow: 0 8px 25px rgba(0, 121, 107, 0.4);
+}
+
+h1 {
+    font-size: 3.5rem;
+    margin-bottom: 10px;
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
+}
+
+.subtitle {
+    font-size: 1.2rem;
+    opacity: 0.9;
+}
+
+.instructions {
+    background: rgba(40, 40, 40, 0.9);
+    color: #f0f0f0;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 1.1rem;
+    border-left: 5px solid #00796b;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.professions-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.profession-card {
+    background: #333;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transform-style: preserve-3d;
+    perspective: 1000px;
+    border: 3px solid transparent; /* Evita que o layout mude ao adicionar a borda */
+    cursor: pointer;
+}
+
+.profession-card.not-clicked {
+    border-color: red;
+}
+
+.profession-card.clicked {
+    border-color: #66bb6a;
+}
+
+.profession-card:hover {
+    transform: translateY(-15px) rotate(2deg) scale(1.05);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+}
+
+.profession-card:active {
+    transform: translateY(-5px) scale(0.98);
+}
+
+.profession-image {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    background-color: #e0f7fa;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    transition: transform 0.3s ease;
+}
+
+.profession-card:hover .profession-image {
+    transform: scale(1.1);
+}
+
+.profession-name {
+    padding: 15px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.4rem;
+    color: #00bfa5;
+    background: linear-gradient(to bottom, #333, #444);
+}
+
+footer {
+    text-align: center;
+    margin-top: 40px;
+    padding: 20px;
+    color: #bbb;
+    font-size: 0.9rem;
+    background: rgba(40, 40, 40, 0.8);
+}
+
+@media (max-width: 768px) {
+    .professions-grid {
+        grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+    }
+    
+    h1 {
+        font-size: 2.5rem;
+    }
+}
+
+/* --- Animação de Fundo --- */
+.background-animation {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    overflow: hidden;
+}
+
+.background-animation li {
+    position: absolute;
+    display: block;
+    list-style: none;
+    width: 20px;
+    height: 20px;
+    background: rgba(255, 179, 71, 0.2); /* Laranja pastel */
+    animation: animate 25s linear infinite;
+    bottom: -150px;
+}
+
+.background-animation li:nth-child(2) { left: 10%; width: 80px; height: 80px; animation-delay: 2s; animation-duration: 12s; background: rgba(118, 215, 196, 0.3); }
+.background-animation li:nth-child(3) { left: 20%; width: 20px; height: 20px; animation-delay: 4s; background: rgba(247, 220, 111, 0.4); }
+.background-animation li:nth-child(4) { left: 40%; width: 60px; height: 60px; animation-duration: 18s; background: rgba(130, 224, 170, 0.3); }
+.background-animation li:nth-child(5) { left: 65%; width: 20px; height: 20px; animation-delay: 0s; }
+.background-animation li:nthchild(6) { left: 75%; width: 110px; height: 110px; animation-delay: 3s; background: rgba(255, 179, 71, 0.2); }
+.background-animation li:nth-child(7) { left: 35%; width: 150px; height: 150px; animation-delay: 7s; background: rgba(118, 215, 196, 0.2); }
+.background-animation li:nth-child(8) { left: 50%; width: 25px; height: 25px; animation-delay: 15s; animation-duration: 45s; }
+.background-animation li:nth-child(9) { left: 20%; width: 15px; height: 15px; animation-delay: 2s; animation-duration: 35s; background: rgba(247, 220, 111, 0.4); }
+.background-animation li:nthchild(10) { left: 85%; width: 150px; height: 150px; animation-delay: 0s; animation-duration: 11s; }
+
+@keyframes animate {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+        border-radius: 0;
+    }
+    100% {
+        transform: translateY(-1000px) rotate(720deg);
+        opacity: 0;
+        border-radius: 50%;
+    }
+}

@@ -137,6 +137,7 @@
                 <button id="playFarmerGameBtn">Play as a Farmer</button>
                 <button id="playArtistGameBtn">Play as an Artist</button>
                 <button id="playDentistGameBtn">Play as a Dentist</button>
+                <button id="playVeterinarianGameBtn">Play as a Veterinarian</button>
                 <!-- Outros jogos podem ser adicionados aqui -->
             </div>
         </div>
@@ -328,6 +329,7 @@
         const playFarmerGameBtn = document.getElementById('playFarmerGameBtn');
         const playArtistGameBtn = document.getElementById('playArtistGameBtn');
         const playDentistGameBtn = document.getElementById('playDentistGameBtn');
+        const playVeterinarianGameBtn = document.getElementById('playVeterinarianGameBtn');
         const gameOverlay = document.getElementById('gameOverlay');
         const closeGameBtn = document.getElementById('closeGameBtn');
         const gameFrame = document.getElementById('gameFrame');
@@ -342,6 +344,7 @@
             farmer: 'https://www.onlinegames.io/games/2022/unity4/the-farmer-craft/index.html',
             artist: 'https://html5.gamedistribution.com/7e0dc3f75b8740cb9f8ffd85f2b1f85e/',
             dentist: 'https://html5.gamedistribution.com/2a355dfa5ff54168b3c69f1de0de7898/?gd_sdk_referrer_url=https://www.onlinegames.io/my-dentist',
+            veterinarian: 'https://html5.gamedistribution.com/3657e20ba8b644de87fa71d7ea26d68e/?gd_sdk_referrer_url=https://www.onlinegames.io/cat-doctor',
         };
 
         // Função para abrir o jogo
@@ -387,6 +390,11 @@
             openGame(games.dentist);
         });
 
+        // Adiciona o evento de clique para o novo botão de jogo
+        playVeterinarianGameBtn.addEventListener('click', () => {
+            openGame(games.veterinarian);
+        });
+
         // Fecha o overlay do jogo
         closeGameBtn.addEventListener('click', () => {
             gameOverlay.classList.remove('active');
@@ -396,5 +404,4 @@
         });
     </script>
 </body>
-
 </html>

@@ -132,7 +132,10 @@
             <button id="playGameBtn">Games</button>
             <div id="gameSubmenu" class="game-submenu">
                 <button id="playChefGameBtn">Play as a Chef</button>
-                <button id="playAstronautGameBtn">Play as a Astronaut</button>
+                <button id="playAstronautGameBtn">Play as an Astronaut</button>
+                <button id="playConstructionWorkerGameBtn">Play as a Construction Worker</button>
+                <button id="playFarmerGameBtn">Play as a Farmer</button>
+                <button id="playArtistGameBtn">Play as an Artist</button>
                 <!-- Outros jogos podem ser adicionados aqui -->
             </div>
         </div>
@@ -321,6 +324,8 @@
         const gameSubmenu = document.getElementById('gameSubmenu');
         const playChefGameBtn = document.getElementById('playChefGameBtn');
         const playAstronautGameBtn = document.getElementById('playAstronautGameBtn');
+        const playFarmerGameBtn = document.getElementById('playFarmerGameBtn');
+        const playArtistGameBtn = document.getElementById('playArtistGameBtn');
         const gameOverlay = document.getElementById('gameOverlay');
         const closeGameBtn = document.getElementById('closeGameBtn');
         const gameFrame = document.getElementById('gameFrame');
@@ -329,8 +334,11 @@
 
         // Objeto para guardar as URLs dos jogos
         const games = {
-            chef: 'https://zv1y2i8p.play.gamezop.com/g/xqO4nZ6Kt',
+            chef: 'https://cloud.onlinegames.io/games/2024/flash/papas-taco-mia/index-og.html',
             astronaut: 'https://zv1y2i8p.play.gamezop.com/g/HJD9VMRQa',
+            constructionWorker: 'https://html5.gamedistribution.com/036ea308d90d43a1aed40716ae683c94/?gd_sdk_referrer_url=https://www.onlinegames.io/idle-mining-empire',
+            farmer: 'https://www.onlinegames.io/games/2022/unity4/the-farmer-craft/index.html',
+            artist: 'https://skribbl.io/',
         };
 
         // Função para abrir o jogo
@@ -354,6 +362,21 @@
 
         playAstronautGameBtn.addEventListener('click', () => {
             openGame(games.astronaut);
+        });
+
+        // Adiciona o evento de clique para o novo botão de jogo
+        playConstructionWorkerGameBtn.addEventListener('click', () => {
+            openGame(games.constructionWorker);
+        });
+
+        // Adiciona o evento de clique para o novo botão de jogo
+        playFarmerGameBtn.addEventListener('click', () => {
+            openGame(games.farmer);
+        });
+
+        // Adiciona o evento de clique para o novo botão de jogo
+        playArtistGameBtn.addEventListener('click', () => {
+            openGame(games.artist);
         });
 
         // Fecha o overlay do jogo

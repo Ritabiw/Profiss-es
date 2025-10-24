@@ -1,6 +1,4 @@
-/* --- Variáveis de Cores --- */
 :root {
-    /* Cores do Modo Escuro (Padrão) */
     --bg-gradient-start: #1a2a6c;
     --bg-gradient-mid: #2c3e50;
     --bg-gradient-end: #1a1a2e;
@@ -19,7 +17,6 @@
 }
 
 body.light-mode {
-    /* Cores do Modo Claro */
     --bg-gradient-start: #f0f2f5;
     --bg-gradient-mid: #e6e9ed;
     --bg-gradient-end: #d9dde2;
@@ -42,7 +39,7 @@ body.light-mode {
     padding: 0;
     box-sizing: border-box;
     font-family: 'Nunito', sans-serif;
-    transition: background-color 0.3s, color 0.3s; /* Transição suave */
+    transition: background-color 0.3s, color 0.3s;
 }
 
 body {
@@ -57,9 +54,9 @@ header {
     padding: 20px;
     background: linear-gradient(135deg, var(--header-bg-start), var(--header-bg-end), var(--header-bg-start));
     border-radius: 15px;
-    color: white; /* Texto do cabeçalho sempre branco para contraste */
+    color: white;
     box-shadow: 0 8px 25px var(--header-shadow);
-    position: relative; /* Para posicionar o interruptor de tema */
+    position: relative;
 }
 
 h1 {
@@ -92,16 +89,14 @@ h1 {
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     transform-style: preserve-3d;
     perspective: 1000px;
-    border: 3px solid transparent; /* Evita que o layout mude ao adicionar a borda */
+    border: 3px solid transparent;
     cursor: pointer;
 }
 
-/* Borda para cards que não foram escutados (CORRIGIDO) */
 .profession-card.unheard {
-    border-color: #ff6b6b; /* Tom de vermelho */
+    border-color: #ff6b6b;
 }
 
-/* Borda para cards que já foram escutados (CORRIGIDO) */
 .profession-card.heard {
     border-color: #66bb6a;
 }
@@ -161,7 +156,6 @@ footer {
     }
 }
 
-/* --- Media Query Adicional para Celulares --- */
 @media (max-width: 480px) {
     h1 {
         font-size: 2rem;
@@ -173,11 +167,10 @@ footer {
     }
 
     .game-submenu {
-        width: 90vw; /* Largura flexível para telas pequenas */
+        width: 90vw;
     }
 }
 
-/* --- Animação de Fundo --- */
 .background-animation {
     position: fixed;
     top: 0;
@@ -194,7 +187,7 @@ footer {
     list-style: none;
     width: 20px;
     height: 20px;
-    background: rgba(255, 179, 71, 0.2); /* Laranja pastel */
+    background: rgba(255, 179, 71, 0.2);
     animation: animate 25s linear infinite;
     bottom: -150px;
 }
@@ -222,7 +215,6 @@ footer {
     }
 }
 
-/* Adicionando o estilo para o card que está sendo falado */
 .profession-card.speaking {
     background-color: var(--speaking-card-bg);
     transform: scale(1.05);
@@ -232,16 +224,13 @@ footer {
     color: var(--speaking-card-text);
 }
 
-/* --- Estilos do Interruptor de Tema --- */
 .theme-switch-wrapper {
     display: flex;
     align-items: center;
-    justify-content: center; /* Centraliza horizontalmente */
-    margin-top: 15px;      /* Adiciona espaço acima */
-    margin-bottom: 25px;   /* Adiciona espaço abaixo */
+    justify-content: center;
+    margin-top: 15px;
+    margin-bottom: 25px;
     gap: 8px;
-    /* A cor será herdada do body ou definida por variáveis de tema */
-    /* Removido position: absolute, top e right para posicionamento abaixo do subtítulo */
 }
 
 .theme-switch {
@@ -281,11 +270,10 @@ footer {
     border-radius: 50%;
 }
 
-/* --- Estilos do Menu de Jogos e Overlay --- */
 .game-button-container {
     text-align: center;
     margin: 40px 0;
-    position: relative; /* Necessário para o posicionamento do submenu */
+    position: relative;
 }
 
 #playGameBtn {
@@ -307,7 +295,6 @@ footer {
 }
 
 .game-submenu {
-    /* Alterado para Grid Layout */
     display: none;
     position: absolute;
     left: 50%;
@@ -315,16 +302,16 @@ footer {
     background-color: #fff;
     border-radius: 15px;
     padding: 15px;
-    grid-template-columns: repeat(3, 1fr); /* 3 colunas */
-    gap: 10px; /* Espaçamento entre os botões */
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
     box-shadow: 0 5px 15px rgba(0,0,0,0.2);
     margin-top: 10px;
-    width: 380px; /* Aumentado para acomodar melhor os botões */
+    width: 380px;
     z-index: 100;
 }
 
 input:checked + .slider {
-    background-color: #4a4a7c; /* Cor do slider no modo escuro */
+    background-color: #4a4a7c;
 }
 
 input:checked + .slider:before {
@@ -332,16 +319,15 @@ input:checked + .slider:before {
 }
 
 
-/* Adicionado para o menu abrir para cima */
 .game-submenu.show-up {
-    display: grid; /* Alterado de block para grid */
-    bottom: 100%; /* Posiciona a base do menu no topo do botão */
+    display: grid;
+    bottom: 100%;
     margin-top: 0;
-    margin-bottom: 10px; /* Espaço entre o menu e o botão */
+    margin-bottom: 10px;
 }
 
 .game-submenu.show {
-    display: grid; /* Alterado de block para grid */
+    display: grid;
 }
 
 .game-submenu button {
@@ -364,7 +350,7 @@ input:checked + .slider:before {
     height: 100%;
     background-color: rgba(0, 0, 0, 0.6);
     backdrop-filter: blur(5px);
-    display: none; /* Escondido por padrão */
+    display: none;
     align-items: center;
     justify-content: center;
     z-index: 1000;
@@ -404,17 +390,11 @@ input:checked + .slider:before {
     transform: scale(1.1);
 }
 
-/*
-   Para o botão de tela cheia sobrepor o jogo, o container (.game-overlay)
-   precisa ter um posicionamento que não seja 'static'.
-   Como ele já é 'fixed', ele serve como o container de posicionamento para o botão.
-*/
 .fullscreen-game-btn {
     position: absolute;
-    top: 15px;      /* Alinhado com o topo do botão de fechar */
-    right: 65px;    /* Posicionado à esquerda do botão de fechar */
-    z-index: 1001; /* Garante que o botão fique sobre o iframe */
-    /* Estilos para contraste */
+    top: 15px;
+    right: 65px;
+    z-index: 1001;
     background: rgba(0, 0, 0, 0.5);
     color: white;
     border: 2px solid white;
@@ -422,7 +402,7 @@ input:checked + .slider:before {
     width: 40px;
     height: 40px;
     font-size: 1.2rem;
-    line-height: 36px; /* Ajuda a centralizar o ícone */
+    line-height: 36px;
     text-align: center;
     cursor: pointer;
     transition: all 0.2s ease;
@@ -433,20 +413,15 @@ input:checked + .slider:before {
     transform: scale(1.1);
 }
 
-/* --- Correção de Cores ao Clicar nos Cards --- */
-
-/* Modo Escuro (padrão): texto do nome fica branco ao clicar */
 .profession-card.heard .profession-name,
 .light-mode .profession-card.heard .profession-name {
     color: var(--card-name-color);
 }
 
-/* Modo Claro: texto do nome volta para a cor principal do card */
 .light-mode .profession-card.heard .profession-name {
     color: var(--card-name-color);
 }
 
-/* Modo Claro: texto do nome fica preto durante a fala */
 .light-mode .profession-card.speaking .profession-name {
-    color: #000000; /* Preto */
+    color: #000000;
 }

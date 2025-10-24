@@ -337,23 +337,15 @@
         // --- Lógica de Tela Cheia Melhorada ---
 
         function toggleFullScreen() {
-            // Verifica se já estamos em tela cheia
-            if (!document.fullscreenElement) {
-                // Entra em tela cheia (usando o gameOverlay para incluir os botões)
-                if (gameOverlay.requestFullscreen) {
-                    gameOverlay.requestFullscreen();
-                } else if (gameOverlay.mozRequestFullScreen) { /* Firefox */
-                    gameOverlay.mozRequestFullScreen();
-                } else if (gameOverlay.webkitRequestFullscreen) { /* Chrome, Safari & Opera */
-                    gameOverlay.webkitRequestFullscreen();
-                } else if (gameOverlay.msRequestFullscreen) { /* IE/Edge */
-                    gameOverlay.msRequestFullscreen();
-                }
-            } else {
-                // Sai da tela cheia
-                if (document.exitFullscreen) {
-                    document.exitFullscreen();
-                }
+            // Apenas o iframe do jogo entra em tela cheia
+            if (gameFrame.requestFullscreen) {
+                gameFrame.requestFullscreen();
+            } else if (gameFrame.mozRequestFullScreen) { /* Firefox */
+                gameFrame.mozRequestFullScreen();
+            } else if (gameFrame.webkitRequestFullscreen) { /* Chrome, Safari & Opera */
+                gameFrame.webkitRequestFullscreen();
+            } else if (gameFrame.msRequestFullscreen) { /* IE/Edge */
+                gameFrame.msRequestFullscreen();
             }
         }
 

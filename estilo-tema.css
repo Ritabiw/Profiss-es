@@ -311,8 +311,8 @@ footer {
 */
 .fullscreen-game-btn {
     position: absolute;
-    bottom: 20px;
-    right: 20px;
+    top: 15px;      /* Alinhado com o topo do botão de fechar */
+    right: 65px;    /* Posicionado à esquerda do botão de fechar */
     z-index: 1001; /* Garante que o botão fique sobre o iframe */
     /* Estilos para contraste */
     background: rgba(0, 0, 0, 0.5);
@@ -331,9 +331,4 @@ footer {
 .fullscreen-game-btn:hover {
     background: rgba(0, 0, 0, 0.8);
     transform: scale(1.1);
-}
-
-/* Esconde o botão de fechar (X) quando o overlay estiver em tela cheia */
-.game-overlay:fullscreen .close-game-btn {
-    display: none;
 }

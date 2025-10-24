@@ -9,142 +9,21 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Nunito:wght@400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="estilo-tema.css">
-    <style>
-        /* Adicionando o estilo para o card que está sendo falado */
-        .profession-card.speaking {
-            background-color: #e1f5fe;
-            transform: scale(1.05);
-            transition: background-color 0.3s, transform 0.3s;
-        }
-        .profession-card {
-            /* Adiciona uma transição suave para o estado normal */
-            transition: background-color 0.5s, transform 0.5s;
-        }
-
-        /* --- Estilos do Menu de Jogos e Overlay --- */
-        .game-button-container {
-            text-align: center;
-            margin: 40px 0;
-            position: relative; /* Necessário para o posicionamento do submenu */
-        }
-
-        #playGameBtn {
-            background: linear-gradient(135deg, #ff8c00 0%, #ff6347 100%);
-            color: white;
-            border: none;
-            padding: 15px 30px;
-            border-radius: 30px;
-            font-size: 1.2rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: transform 0.2s, box-shadow 0.2s;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-        }
-
-        #playGameBtn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 12px rgba(0,0,0,0.3);
-        }
-
-        .game-submenu {
-            /* Alterado para Grid Layout */
-            display: none;
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            background-color: #fff;
-            border-radius: 15px;
-            padding: 15px;
-            grid-template-columns: repeat(3, 1fr); /* 3 colunas */
-            gap: 10px; /* Espaçamento entre os botões */
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-            margin-top: 10px;
-            width: 380px; /* Aumentado para acomodar melhor os botões */
-            z-index: 100;
-        }
-
-        /* Adicionado para o menu abrir para cima */
-        .game-submenu.show-up {
-            display: grid; /* Alterado de block para grid */
-            bottom: 100%; /* Posiciona a base do menu no topo do botão */
-            margin-top: 0;
-            margin-bottom: 10px; /* Espaço entre o menu e o botão */
-        }
-
-        .game-submenu.show {
-            display: grid; /* Alterado de block para grid */
-        }
-
-        .game-submenu button {
-            background: linear-gradient(135deg, #2193b0, #6dd5ed);
-            color: white;
-            border: none;
-            padding: 12px 20px;
-            width: 100%;
-            border-radius: 10px;
-            text-align: center;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        /* O 'gap' do grid substitui a necessidade de margem entre os botões */
-
-
-        .game-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(5px);
-            display: none; /* Escondido por padrão */
-            align-items: center;
-            justify-content: center;
-            z-index: 1000;
-        }
-
-        .game-overlay.active {
-            display: flex;
-        }
-
-        .game-overlay iframe {
-            width: 90%;
-            height: 90%;
-            border: 3px solid white;
-            border-radius: 15px;
-        }
-
-        .close-game-btn {
-            position: absolute;
-            top: 20px;
-            right: 30px;
-            font-size: 3rem;
-            color: white;
-            background: none;
-            border: none;
-            cursor: pointer;
-        }
-
-        .fullscreen-game-btn {
-            position: absolute;
-            top: 28px; /* Ajuste vertical */
-            right: 80px; /* Posição à esquerda do botão de fechar */
-            font-size: 2.2rem;
-            color: white;
-            background: none;
-            border: none;
-            cursor: pointer;
-            z-index: 1001; /* Garante que fique sobre o iframe */
-        }
-
-    </style>
 
 </head>
 <body>
     <div class="container">
         <header>
             <h1>Profissões em Inglês</h1>
+            <!-- Interruptor de Tema -->
+            <div class="theme-switch-wrapper">
+                <i class="fas fa-sun"></i>
+                <label class="theme-switch">
+                    <input type="checkbox" id="theme-toggle">
+                    <span class="slider round"></span>
+                </label>
+                <i class="fas fa-moon"></i>
+            </div>
             <p class="subtitle">Clique em cada profissão para ouvir a pronúncia!</p>
         </header>
         <div class="professions-grid" id="professionsGrid">
@@ -299,9 +178,11 @@
             
             professionsToRender.forEach(profession => {
                 const card = document.createElement('div');
-                card.className = 'profession-card';
+                card.className = 'profession-card unheard'; // Adiciona a classe 'unheard' por padrão
+                card.setAttribute('role', 'button'); // Melhoria de Acessibilidade
+                card.setAttribute('tabindex', '0');    // Melhoria de Acessibilidade
                 const imageHtml = profession.image 
-                    ? `<img src="${profession.image}" alt="${profession.name}" class="profession-image">`
+                    ? `<img src="${profession.image}" alt="${profession.name}" class="profession-image" loading="lazy">` // Melhoria de Performance
                     : `<div class="profession-image">${profession.emoji || '🏢'}</div>`;
 
                 card.innerHTML = `
@@ -311,6 +192,7 @@
                 
                 // Passa o nome e o próprio elemento do card para a função
                 card.addEventListener('click', () => speakProfession(profession.name, card));
+                card.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') speakProfession(profession.name, card); }); // Acessibilidade
                 professionsGrid.appendChild(card);
             });
         }
@@ -319,6 +201,12 @@
         function speakProfession(name, cardElement) {
             // Cancela qualquer fala anterior para evitar sobreposição
             speechSynthesis.cancel();
+
+            // Remove a borda vermelha e adiciona a verde
+            if (cardElement) {
+                cardElement.classList.remove('unheard');
+                cardElement.classList.add('heard');
+            }
 
             // Usando a API de síntese de voz do navegador
             const utterance = new SpeechSynthesisUtterance(name);
@@ -458,8 +346,10 @@
             gameFrame.src = ''; // Limpa o src para parar o jogo
         });
 
-        // Abre o jogo em tela cheia
-        fullscreenGameBtn.addEventListener('click', () => {
+        // --- Lógica de Tela Cheia Melhorada ---
+
+        function toggleFullScreen() {
+            // Apenas o iframe do jogo entra em tela cheia
             if (gameFrame.requestFullscreen) {
                 gameFrame.requestFullscreen();
             } else if (gameFrame.mozRequestFullScreen) { /* Firefox */
@@ -469,14 +359,37 @@
             } else if (gameFrame.msRequestFullscreen) { /* IE/Edge */
                 gameFrame.msRequestFullscreen();
             }
-        });
+        }
 
+        // Adiciona o evento de clique para alternar a tela cheia
+        fullscreenGameBtn.addEventListener('click', toggleFullScreen);
+
+        // --- Lógica do Modo Claro/Escuro ---
+        const themeToggle = document.getElementById('theme-toggle');
+        const body = document.body;
+
+        // Função para aplicar o tema
+        function applyTheme(theme) {
+            if (theme === 'light') {
+                body.classList.add('light-mode');
+                themeToggle.checked = false; // O interruptor mostra o sol (desmarcado)
+            } else {
+                body.classList.remove('light-mode');
+                themeToggle.checked = true; // O interruptor mostra a lua (marcado)
+            }
+        }
+
+        // Verifica o tema salvo no localStorage ou a preferência do sistema
+        const savedTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+        applyTheme(savedTheme);
+
+        // Adiciona o evento de clique para o interruptor
+        themeToggle.addEventListener('change', () => {
+            const newTheme = themeToggle.checked ? 'dark' : 'light';
+            localStorage.setItem('theme', newTheme);
+            applyTheme(newTheme);
+        });
     </script>
 </body>
 
 </html>
-
-
-
-
-

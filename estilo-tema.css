@@ -1,13 +1,53 @@
+/* --- Variáveis de Cores --- */
+:root {
+    /* Cores do Modo Escuro (Padrão) */
+    --bg-gradient-start: #1a2a6c;
+    --bg-gradient-mid: #2c3e50;
+    --bg-gradient-end: #1a1a2e;
+    --text-color: #f0f0f0;
+    --header-bg-start: #004d40;
+    --header-bg-end: #00796b;
+    --header-shadow: rgba(0, 121, 107, 0.4);
+    --card-bg: #333;
+    --card-bg-gradient-end: #444;
+    --card-shadow: rgba(0, 0, 0, 0.15);
+    --card-name-color: #00bfa5;
+    --footer-bg: rgba(40, 40, 40, 0.8);
+    --footer-text: #bbb;
+    --speaking-card-bg: #e1f5fe;
+    --speaking-card-text: #111;
+}
+
+body.light-mode {
+    /* Cores do Modo Claro */
+    --bg-gradient-start: #f0f2f5;
+    --bg-gradient-mid: #e6e9ed;
+    --bg-gradient-end: #d9dde2;
+    --text-color: #2c3e50;
+    --header-bg-start: #00796b;
+    --header-bg-end: #009688;
+    --header-shadow: rgba(0, 121, 107, 0.2);
+    --card-bg: #ffffff;
+    --card-bg-gradient-end: #f9f9f9;
+    --card-shadow: rgba(0, 0, 0, 0.1);
+    --card-name-color: #00796b;
+    --footer-bg: rgba(255, 255, 255, 0.8);
+    --footer-text: #555;
+    --speaking-card-bg: #00796b;
+    --speaking-card-text: #fff;
+}
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: 'Nunito', sans-serif;
+    transition: background-color 0.3s, color 0.3s; /* Transição suave */
 }
 
 body {
-    background: linear-gradient(135deg, #1a2a6c, #2c3e50, #1a1a2e);
-    color: #f0f0f0;
+    background: linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-mid), var(--bg-gradient-end));
+    color: var(--text-color);
     padding: 20px;
 }
 
@@ -15,10 +55,11 @@ header {
     text-align: center;
     margin-bottom: 30px;
     padding: 20px;
-    background: linear-gradient(135deg, #004d40, #00796b, #004d40);
+    background: linear-gradient(135deg, var(--header-bg-start), var(--header-bg-end), var(--header-bg-start));
     border-radius: 15px;
-    color: white;
-    box-shadow: 0 8px 25px rgba(0, 121, 107, 0.4);
+    color: white; /* Texto do cabeçalho sempre branco para contraste */
+    box-shadow: 0 8px 25px var(--header-shadow);
+    position: relative; /* Para posicionar o interruptor de tema */
 }
 
 h1 {
@@ -30,17 +71,6 @@ h1 {
 .subtitle {
     font-size: 1.2rem;
     opacity: 0.9;
-}
-
-.instructions {
-    background: rgba(40, 40, 40, 0.9);
-    color: #f0f0f0;
-    padding: 15px;
-    border-radius: 10px;
-    margin-bottom: 20px;
-    text-align: center;
-    font-size: 1.1rem;
-    border-left: 5px solid #00796b;
 }
 
 .container {
@@ -55,10 +85,10 @@ h1 {
 }
 
 .profession-card {
-    background: #333;
+    background: var(--card-bg);
     border-radius: 15px;
     overflow: hidden;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 10px 25px var(--card-shadow);
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     transform-style: preserve-3d;
     perspective: 1000px;
@@ -66,17 +96,19 @@ h1 {
     cursor: pointer;
 }
 
-.profession-card.not-clicked {
-    border-color: red;
+/* Borda para cards que não foram escutados (CORRIGIDO) */
+.profession-card.unheard {
+    border-color: #ff6b6b; /* Tom de vermelho */
 }
 
-.profession-card.clicked {
+/* Borda para cards que já foram escutados (CORRIGIDO) */
+.profession-card.heard {
     border-color: #66bb6a;
 }
 
 .profession-card:hover {
     transform: translateY(-15px) rotate(2deg) scale(1.05);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 20px 40px var(--card-shadow);
 }
 
 .profession-card:active {
@@ -104,19 +136,21 @@ h1 {
     text-align: center;
     font-weight: bold;
     font-size: 1.4rem;
-    color: #00bfa5;
-    background: linear-gradient(to bottom, #333, #444);
+    color: var(--card-name-color);
+    background: linear-gradient(to bottom, var(--card-bg), var(--card-bg-gradient-end));
 }
 
 footer {
     text-align: center;
     margin-top: 40px;
     padding: 20px;
-    color: #bbb;
+    color: var(--footer-text);
+    display: flex;
+    justify-content: center;
     font-size: 0.9rem;
-    background: rgba(40, 40, 40, 0.8);
+    background: var(--footer-bg);
 }
-
+ 
 @media (max-width: 768px) {
     .professions-grid {
         grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
@@ -124,6 +158,22 @@ footer {
     
     h1 {
         font-size: 2.5rem;
+    }
+}
+
+/* --- Media Query Adicional para Celulares --- */
+@media (max-width: 480px) {
+    h1 {
+        font-size: 2rem;
+    }
+
+    .professions-grid {
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+        gap: 15px;
+    }
+
+    .game-submenu {
+        width: 90vw; /* Largura flexível para telas pequenas */
     }
 }
 
@@ -153,11 +203,11 @@ footer {
 .background-animation li:nth-child(3) { left: 20%; width: 20px; height: 20px; animation-delay: 4s; background: rgba(247, 220, 111, 0.4); }
 .background-animation li:nth-child(4) { left: 40%; width: 60px; height: 60px; animation-duration: 18s; background: rgba(130, 224, 170, 0.3); }
 .background-animation li:nth-child(5) { left: 65%; width: 20px; height: 20px; animation-delay: 0s; }
-.background-animation li:nthchild(6) { left: 75%; width: 110px; height: 110px; animation-delay: 3s; background: rgba(255, 179, 71, 0.2); }
+.background-animation li:nth-child(6) { left: 75%; width: 110px; height: 110px; animation-delay: 3s; background: rgba(255, 179, 71, 0.2); }
 .background-animation li:nth-child(7) { left: 35%; width: 150px; height: 150px; animation-delay: 7s; background: rgba(118, 215, 196, 0.2); }
 .background-animation li:nth-child(8) { left: 50%; width: 25px; height: 25px; animation-delay: 15s; animation-duration: 45s; }
 .background-animation li:nth-child(9) { left: 20%; width: 15px; height: 15px; animation-delay: 2s; animation-duration: 35s; background: rgba(247, 220, 111, 0.4); }
-.background-animation li:nthchild(10) { left: 85%; width: 150px; height: 150px; animation-delay: 0s; animation-duration: 11s; }
+.background-animation li:nth-child(10) { left: 85%; width: 150px; height: 150px; animation-delay: 0s; animation-duration: 11s; }
 
 @keyframes animate {
     0% {
@@ -172,22 +222,62 @@ footer {
     }
 }
 
-/* --- Estilos movidos do index.html --- */
-
-/* Borda para cards que não foram escutados */
-.profession-card.unheard {
-    border-color: #ff6b6b; /* Tom de vermelho */
-}
-
-/* Borda para cards que já foram escutados */
-.profession-card.heard {
-    border-color: #51cf66; /* Tom de verde */
-}
-
 /* Adicionando o estilo para o card que está sendo falado */
 .profession-card.speaking {
-    background-color: #e1f5fe;
+    background-color: var(--speaking-card-bg);
     transform: scale(1.05);
+}
+
+.profession-card.speaking .profession-name {
+    color: var(--speaking-card-text);
+}
+
+/* --- Estilos do Interruptor de Tema --- */
+.theme-switch-wrapper {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: white;
+}
+
+.theme-switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 26px;
+}
+
+.theme-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+    border-radius: 26px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 18px;
+    width: 18px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
 }
 
 /* --- Estilos do Menu de Jogos e Overlay --- */
@@ -231,6 +321,15 @@ footer {
     width: 380px; /* Aumentado para acomodar melhor os botões */
     z-index: 100;
 }
+
+input:checked + .slider {
+    background-color: #4a4a7c; /* Cor do slider no modo escuro */
+}
+
+input:checked + .slider:before {
+    transform: translateX(24px);
+}
+
 
 /* Adicionado para o menu abrir para cima */
 .game-submenu.show-up {

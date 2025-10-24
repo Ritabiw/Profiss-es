@@ -15,16 +15,16 @@
         <header>
             <h1>Profissões em Inglês</h1>
             <p class="subtitle">Clique em cada profissão para ouvir a pronúncia!</p>
-            <!-- Interruptor de Tema -->
-            <div class="theme-switch-wrapper">
-                <i class="fas fa-sun"></i>
-                <label class="theme-switch">
-                    <input type="checkbox" id="theme-toggle">
-                    <span class="slider round"></span>
-                </label>
-                <i class="fas fa-moon"></i>
-            </div>
         </header>
+        <!-- Interruptor de Tema -->
+        <div class="theme-switch-wrapper">
+            <i class="fas fa-sun"></i>
+            <label class="theme-switch">
+                <input type="checkbox" id="theme-toggle">
+                <span class="slider round"></span>
+            </label>
+            <i class="fas fa-moon"></i>
+        </div>
         <div class="professions-grid" id="professionsGrid">
             <!-- As profissões serão inseridas aqui via JavaScript -->
         </div>
@@ -404,6 +404,12 @@
             const newTheme = themeToggle.checked ? 'dark' : 'light';
             localStorage.setItem('theme', newTheme);
             applyTheme(newTheme);
+        });
+
+        // --- Lógica para Reiniciar o Jogo ao Atualizar a Página ---
+        window.addEventListener('beforeunload', () => {
+            // Limpa o iframe para garantir que o jogo não fique em cache no navegador
+            gameFrame.src = 'about:blank';
         });
     </script>
 </body>

@@ -288,6 +288,23 @@
             gameSubmenu.classList.remove('show'); // Esconde o submenu
         }
 
+        // Função para criar o iframe do jogo (CORREÇÃO)
+        function createGameIframe(gameUrl) {
+            const frame = document.createElement('iframe');
+            frame.id = 'gameFrame';
+            frame.setAttribute('seamless', 'seamless');
+            frame.setAttribute('allowtransparency', 'true');
+            frame.setAttribute('allowfullscreen', 'true');
+            frame.setAttribute('frameborder', '0');
+
+            // Adiciona um timestamp à URL para forçar o reinício do jogo e evitar o cache.
+            // Esta é a melhor maneira de garantir que o progresso seja apagado.
+            const cacheBusterUrl = gameUrl + (gameUrl.includes('?') ? '&' : '?') + '_=' + new Date().getTime();
+            frame.src = cacheBusterUrl;
+
+            return frame;
+        }
+
         // Função para fechar o jogo
         function closeGame() {
             gameOverlay.classList.remove('active');

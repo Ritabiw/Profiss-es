@@ -14,6 +14,7 @@
     <div class="container">
         <header>
             <h1>Profissões em Inglês</h1>
+            <p class="subtitle">Clique em cada profissão para ouvir a pronúncia!</p>
             <!-- Interruptor de Tema -->
             <div class="theme-switch-wrapper">
                 <i class="fas fa-sun"></i>
@@ -23,7 +24,6 @@
                 </label>
                 <i class="fas fa-moon"></i>
             </div>
-            <p class="subtitle">Clique em cada profissão para ouvir a pronúncia!</p>
         </header>
         <div class="professions-grid" id="professionsGrid">
             <!-- As profissões serão inseridas aqui via JavaScript -->
@@ -267,12 +267,31 @@
 
         // Função para abrir o jogo
         function openGame(gameUrl) {
+            // Adiciona um estado no histórico para capturar o botão "voltar" do dispositivo
+            history.pushState({gameOpen: true}, null);
+
             gameFrame.src = gameUrl;
             gameOverlay.classList.add('active');
             mainContainer.style.filter = 'blur(5px)';
             footer.style.filter = 'blur(5px)';
             gameSubmenu.classList.remove('show'); // Esconde o submenu
         }
+
+        // Função para fechar o jogo
+        function closeGame() {
+            gameOverlay.classList.remove('active');
+            mainContainer.style.filter = 'none';
+            footer.style.filter = 'none';
+            gameFrame.src = ''; // Limpa o src para parar o jogo
+        }
+
+        // Evento para o botão "voltar" do navegador/dispositivo
+        window.addEventListener('popstate', function(event) {
+            // Se o overlay do jogo estiver ativo, fecha ele em vez de voltar a página.
+            if (gameOverlay.classList.contains('active')) {
+                closeGame();
+            }
+        });
 
         // Mostra/esconde o submenu de jogos
         playGameBtn.addEventListener('click', () => {
@@ -339,10 +358,8 @@
 
         // Fecha o overlay do jogo
         closeGameBtn.addEventListener('click', () => {
-            gameOverlay.classList.remove('active');
-            mainContainer.style.filter = 'none';
-            footer.style.filter = 'none';
-            gameFrame.src = ''; // Limpa o src para parar o jogo
+            // Volta no histórico para remover o estado que adicionamos e aciona o 'popstate'
+            history.back();
         });
 
         // --- Lógica de Tela Cheia Melhorada ---

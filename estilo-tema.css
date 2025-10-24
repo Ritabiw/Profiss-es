@@ -431,3 +431,16 @@ input:checked + .slider:before {
     background: rgba(0, 0, 0, 0.8);
     transform: scale(1.1);
 }
+
+/* --- Correção de Cores ao Clicar nos Cards --- */
+
+/* Modo Escuro (padrão): texto do nome fica branco ao clicar */
+.profession-card.heard .profession-name,
+.profession-card.speaking .profession-name {
+    color: white; /* Cor para o modo escuro */
+}
+
+/* Modo Claro: texto do nome volta para a cor principal do card */
+.light-mode .profession-card.heard .profession-name {
+    color: var(--card-name-color);
+}

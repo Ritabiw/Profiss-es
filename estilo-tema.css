@@ -280,3 +280,60 @@ footer {
     border: 3px solid white;
     border-radius: 15px;
 }
+
+.close-game-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    z-index: 1001;
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: 2px solid white;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    font-size: 2rem;
+    line-height: 36px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.close-game-btn:hover {
+    background: rgba(255, 0, 0, 0.7);
+    transform: scale(1.1);
+}
+
+/*
+   Para o botão de tela cheia sobrepor o jogo, o container (.game-overlay)
+   precisa ter um posicionamento que não seja 'static'.
+   Como ele já é 'fixed', ele serve como o container de posicionamento para o botão.
+*/
+.fullscreen-game-btn {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1001; /* Garante que o botão fique sobre o iframe */
+    /* Estilos para contraste */
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: 2px solid white;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    font-size: 1.2rem;
+    line-height: 36px; /* Ajuda a centralizar o ícone */
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.fullscreen-game-btn:hover {
+    background: rgba(0, 0, 0, 0.8);
+    transform: scale(1.1);
+}
+
+/* Esconde o botão de fechar (X) quando o overlay estiver em tela cheia */
+.game-overlay:fullscreen .close-game-btn {
+    display: none;
+}

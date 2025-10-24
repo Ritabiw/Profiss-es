@@ -234,13 +234,14 @@ footer {
 
 /* --- Estilos do Interruptor de Tema --- */
 .theme-switch-wrapper {
-    position: absolute;
-    top: 20px;
-    right: 20px;
     display: flex;
     align-items: center;
+    justify-content: center; /* Centraliza horizontalmente */
+    margin-top: 15px;      /* Adiciona espaço acima */
+    margin-bottom: 25px;   /* Adiciona espaço abaixo */
     gap: 8px;
-    color: white;
+    /* A cor será herdada do body ou definida por variáveis de tema */
+    /* Removido position: absolute, top e right para posicionamento abaixo do subtítulo */
 }
 
 .theme-switch {
@@ -436,11 +437,16 @@ input:checked + .slider:before {
 
 /* Modo Escuro (padrão): texto do nome fica branco ao clicar */
 .profession-card.heard .profession-name,
-.profession-card.speaking .profession-name {
-    color: white; /* Cor para o modo escuro */
+.light-mode .profession-card.heard .profession-name {
+    color: var(--card-name-color);
 }
 
 /* Modo Claro: texto do nome volta para a cor principal do card */
 .light-mode .profession-card.heard .profession-name {
     color: var(--card-name-color);
+}
+
+/* Modo Claro: texto do nome fica preto durante a fala */
+.light-mode .profession-card.speaking .profession-name {
+    color: #000000; /* Preto */
 }
